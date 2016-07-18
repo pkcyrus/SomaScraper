@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<scraper name="somascraper">
+    <version>0.5</version>
+    <initialized>false</initialized>
+    <minimizeOnExit>false</minimizeOnExit>
+    <scrapeFrequency>30</scrapeFrequency>
+    <databaseDirectory>./</databaseDirectory>
+    <player buffer="512" record="true" directory="./stream/"/>
+    <channels>
+        <channel name="Poptron" short="poptron" pl_url="http://www.somafm.com/poptron/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/poptron120.png"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/poptron-128-mp3" alt="http://ice2.somafm.com/poptron-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/poptron-64-aac" alt="http://ice2.somafm.com/poptron-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/poptron-32-aac" alt="http://ice2.somafm.com/poptron-32-aac"/>-->
+        </channel>
+        <channel name="Groove Salad" short="groovesalad" pl_url="http://www.somafm.com/groovesalad/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/groovesalad120.png"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/groovesalad-128-mp3" alt="http://ice2.somafm.com/groovesalad-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/groovesalad-128-aac" alt="http://ice2.somafm.com/groovesalad-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/groovesalad-64-aac" alt="http://ice2.somafm.com/groovesalad-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/groovesalad-32-aac" alt="http://ice2.somafm.com/groovesalad-32-aac"/>-->
+        </channel>
+        <channel name="Drone Zone" short="dronezone" pl_url="http://www.somafm.com/dronezone/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/dronezone120.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/dronezone-128-mp3" alt="http://ice2.somafm.com/dronezone-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/dronezone-128-aac" alt="http://ice2.somafm.com/dronezone-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/dronezone-64-aac" alt="http://ice2.somafm.com/dronezone-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/dronezone-32-aac" alt="http://ice2.somafm.com/dronezone-32-aac"/>-->
+        </channel>
+        <channel name="BAGeL Radio" short="bagel" pl_url="http://www.somafm.com/bagel/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/bagel120.png"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/bagel-128-mp3" alt="http://ice2.somafm.com/bagel-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/bagel-64-aac" alt="http://ice2.somafm.com/bagel-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/bagel-32-aac" alt="http://ice2.somafm.com/bagel-32-aac"/>-->
+        </channel>
+        <channel name="Beat Blender" short="beatblender" pl_url="http://www.somafm.com/beatblender/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/blender120.png"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/beatblender-128-mp3" alt="http://ice2.somafm.com/beatblender-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/beatblender-64-aac" alt="http://ice2.somafm.com/beatblender-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/beatblender-32-aac" alt="http://ice2.somafm.com/beatblender-32-aac"/>-->
+        </channel>
+        <channel name="Boot Liquor" short="bootliquor" pl_url="http://www.somafm.com/bootliquor/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/bootliquor120.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/bootliquor-128-mp3" alt="http://ice2.somafm.com/bootliquor-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/bootliquor-128-aac" alt="http://ice2.somafm.com/bootliquor-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/bootliquor-64-aac" alt="http://ice2.somafm.com/bootliquor-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/bootliquor-32-aac" alt="http://ice2.somafm.com/bootliquor-32-aac"/>-->
+        </channel>
+        <channel name="Black Rock FM" short="brfm" pl_url="http://www.somafm.com/brfm/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/1023brc.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/brfm-128-mp3" alt="http://ice2.somafm.com/brfm-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/brfm-128-aac" alt="http://ice2.somafm.com/brfm-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/brfm-64-aac" alt="http://ice2.somafm.com/brfm-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/brfm-32-aac" alt="http://ice2.somafm.com/brfm-32-aac"/>-->
+        </channel>
+        <channel name="Christmas Lounge" short="christmas" pl_url="http://www.somafm.com/christmas/songhistory.html">
+            <doScrape>false</doScrape>
+        </channel>
+        <channel name="cliqhop idm" short="cliqhop" pl_url="http://www.somafm.com/cliqhop/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/cliqhop120.png"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/cliqhop-128-mp3" alt="http://ice2.somafm.com/cliqhop-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/cliqhop-64-aac" alt="http://ice2.somafm.com/cliqhop-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/cliqhop-32-aac" alt="http://ice2.somafm.com/cliqhop-32-aac"/>-->
+        </channel>
+        <channel name="Covers" short="covers" pl_url="http://www.somafm.com/covers/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/covers120.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/covers-128-mp3" alt="http://ice2.somafm.com/covers-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/covers-64-aac" alt="http://ice2.somafm.com/covers-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/covers-32-aac" alt="http://ice2.somafm.com/covers-32-aac"/>-->
+        </channel>
+        <channel name="Deep Space One" short="deepspaceone" pl_url="http://www.somafm.com/deepspaceone/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/deepspaceone120.gif"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/deepspaceone-128-mp3" alt="http://ice2.somafm.com/deepspaceone-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/deepspaceone-128-aac" alt="http://ice2.somafm.com/deepspaceone-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/deepspaceone-64-aac" alt="http://ice2.somafm.com/deepspaceone-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/deepspaceone-32-aac" alt="http://ice2.somafm.com/deepspaceone-32-aac"/>-->
+        </channel>
+        <channel name="DEF CON Radio" short="defcon" pl_url="http://www.somafm.com/defcon/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/defcon120.png"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/defcon-128-mp3" alt="http://ice2.somafm.com/defcon-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/defcon-64-aac" alt="http://ice2.somafm.com/defcon-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/defcon-32-aac" alt="http://ice2.somafm.com/defcon-32-aac"/>-->
+        </channel>
+        <channel name="Digitalis" short="digitalis" pl_url="http://www.somafm.com/digitalis/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/digitalis120.png"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/digitalis-128-mp3" alt="http://ice2.somafm.com/digitalis-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/digitalis-128-aac" alt="http://ice2.somafm.com/digitalis-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/digitalis-64-aac" alt="http://ice2.somafm.com/digitalis-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/digitalis-32-aac" alt="http://ice2.somafm.com/digitalis-32-aac"/>-->
+        </channel>
+        <channel name="Doomed" short="doomed" pl_url="http://www.somafm.com/doomed/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/doomed120.png"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/doomed-128-mp3" alt="http://ice2.somafm.com/doomed-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/doomed-64-aac" alt="http://ice2.somafm.com/doomed-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/doomed-32-aac" alt="http://ice2.somafm.com/doomed-32-aac"/>-->
+        </channel>
+        <channel name="Dub Step Beyond" short="dubstep" pl_url="http://www.somafm.com/dubstep/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/dubstep120.png"/>
+            <stream type="mp3:256k" url="http://ice1.somafm.com/dubstep-256-mp3" alt="http://ice2.somafm.com/dubstep-256-mp3"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/dubstep-128-mp3" alt="http://ice2.somafm.com/dubstep-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/dubstep-64-aac" alt="http://ice2.somafm.com/dubstep-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/dubstep-32-aac" alt="http://ice2.somafm.com/dubstep-32-aac"/>-->
+        </channel>
+        <channel name="Earwaves" short="earwaves" pl_url="http://www.somafm.com/earwaves/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/earwaves120.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/earwaves-128-mp3" alt="http://ice2.somafm.com/earwaves-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/earwaves-128-aac" alt="http://ice2.somafm.com/earwaves-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/earwaves-64-aac" alt="http://ice2.somafm.com/earwaves-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/earwaves-32-aac" alt="http://ice2.somafm.com/earwaves-32-aac"/>-->
+        </channel>
+        <channel name="Fluid" short="fluid" pl_url="http://www.somafm.com/fluid/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/fluid120.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/fluid-128-mp3" alt="http://ice2.somafm.com/fluid-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/fluid-128-aac" alt="http://ice2.somafm.com/fluid-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/fluid-64-aac" alt="http://ice2.somafm.com/fluid-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/fluid-32-aac" alt="http://ice2.somafm.com/fluid-32-aac"/>-->
+        </channel>
+        <channel name="Folk Forward" short="folkfwd" pl_url="http://www.somafm.com/folkfwd/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/folkfwd120.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/folkfwd-128-mp3" alt="http://ice2.somafm.com/folkfwd-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/folkfwd-64-aac" alt="http://ice2.somafm.com/folkfwd-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/folkfwd-32-aac" alt="http://ice2.somafm.com/folkfwd-32-aac"/>-->
+        </channel>
+        <channel name="Illinois Street Lounge" short="illstreet" pl_url="http://www.somafm.com/illstreet/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/illstreet.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/illstreet-128-mp3" alt="http://ice2.somafm.com/illstreet-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/illstreet-128-aac" alt="http://ice2.somafm.com/illstreet-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/illstreet-64-aac" alt="http://ice2.somafm.com/illstreet-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/illstreet-32-aac" alt="http://ice2.somafm.com/illstreet-32-aac"/>-->
+        </channel>
+        <channel name="Indie Pop Rocks!" short="indiepop" pl_url="http://www.somafm.com/indiepop/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/indychick.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/indiepop-128-mp3" alt="http://ice2.somafm.com/indiepop-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/indiepop-128-aac" alt="http://ice2.somafm.com/indiepop-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/indiepop-64-aac" alt="http://ice2.somafm.com/indiepop-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/indiepop-32-aac" alt="http://ice2.somafm.com/indiepop-32-aac"/>-->
+        </channel>
+        <channel name="Jolly Ol' Soul" short="jollysoul" pl_url="http://www.somafm.com/jollysoul/songhistory.html">
+            <doScrape>false</doScrape>
+        </channel>
+        <channel name="Lush" short="lush" pl_url="http://www.somafm.com/lush/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/lush-x120.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/lush-128-mp3" alt="http://ice2.somafm.com/lush-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/lush-128-aac" alt="http://ice2.somafm.com/lush-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/lush-64-aac" alt="http://ice2.somafm.com/lush-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/lush-32-aac" alt="http://ice2.somafm.com/lush-32-aac"/>-->
+        </channel>
+        <channel name="Metal Detector" short="metal" pl_url="http://www.somafm.com/metal/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/metal-200.png"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/metal-128-mp3" alt="http://ice2.somafm.com/metal-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/metal-128-aac" alt="http://ice2.somafm.com/metal-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/metal-64-aac" alt="http://ice2.somafm.com/metal-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/metal-32-aac" alt="http://ice2.somafm.com/metal-32-aac"/>-->
+        </channel>
+        <channel name="Mission Control" short="missioncontrol" pl_url="http://www.somafm.com/missioncontrol/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/missioncontrol120.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/missioncontrol-128-mp3" alt="http://ice2.somafm.com/missioncontrol-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/missioncontrol-64-aac" alt="http://ice2.somafm.com/missioncontrol-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/missioncontrol-32-aac" alt="http://ice2.somafm.com/missioncontrol-32-aac"/>-->
+        </channel>
+        <channel name="Secret Agent" short="secretagent" pl_url="http://www.somafm.com/secretagent/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/secretagent120.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/secretagent-128-mp3" alt="http://ice2.somafm.com/secretagent-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/secretagent-128-aac" alt="http://ice2.somafm.com/secretagent-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/secretagent-64-aac" alt="http://ice2.somafm.com/secretagent-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/secretagent-32-aac" alt="http://ice2.somafm.com/secretagent-32-aac"/>-->
+        </channel>
+        <channel name="Left Coast 70s" short="seventies" pl_url="http://www.somafm.com/seventies/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/seventies120.jpg"/>
+            <stream type="mp3:320k" url="http://ice1.somafm.com/seventies-320-mp3" alt="http://ice2.somafm.com/seventies-320-mp3"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/seventies-128-mp3" alt="http://ice2.somafm.com/seventies-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/seventies-64-aac" alt="http://ice2.somafm.com/seventies-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/seventies-32-aac" alt="http://ice2.somafm.com/seventies-32-aac"/>-->
+        </channel>
+        <channel name="SF 10-33" short="sf1033" pl_url="http://www.somafm.com/sf1033/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/sf1033120.png"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/sf1033-128-mp3" alt="http://ice2.somafm.com/sf1033-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/sf1033-64-aac" alt="http://ice2.somafm.com/sf1033-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/sf1033-32-aac" alt="http://ice2.somafm.com/sf1033-32-aac"/>-->
+        </channel>
+        <channel name="Seven Inch Soul" short="7soul" pl_url="http://www.somafm.com/7soul/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/7soul120.png"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/7soul-128-mp3" alt="http://ice2.somafm.com/7soul-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/7soul-128-aac" alt="http://ice2.somafm.com/7soul-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/7soul-64-aac" alt="http://ice2.somafm.com/7soul-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/7soul-32-aac" alt="http://ice2.somafm.com/7soul-32-aac"/>-->
+        </channel>
+        <channel name="Sonic Universe" short="sonicuniverse" pl_url="http://www.somafm.com/sonicuniverse/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/sonicuniverse120.jpg"/>
+            <stream type="mp3:192k" url="http://ice1.somafm.com/sonicuniverse-192-mp3" alt="http://ice2.somafm.com/sonicuniverse-192-mp3"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/sonicuniverse-128-mp3" alt="http://ice2.somafm.com/sonicuniverse-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/sonicuniverse-64-aac" alt="http://ice2.somafm.com/sonicuniverse-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/sonicuniverse-32-aac" alt="http://ice2.somafm.com/sonicuniverse-32-aac"/>-->
+        </channel>
+        <channel name="Space Station Soma" short="spacestation" pl_url="http://www.somafm.com/spacestation/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/sss.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/spacestation-128-mp3" alt="http://ice2.somafm.com/spacestation-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/spacestation-128-aac" alt="http://ice2.somafm.com/spacestation-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/spacestation-64-aac" alt="http://ice2.somafm.com/spacestation-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/spacestation-32-aac" alt="http://ice2.somafm.com/spacestation-32-aac"/>-->
+        </channel>
+        <channel name="Suburbs of Goa" short="suburbsofgoa" pl_url="http://www.somafm.com/suburbsofgoa/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/sog120.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/suburbsofgoa-128-mp3" alt="http://ice2.somafm.com/suburbsofgoa-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/suburbsofgoa-128-aac" alt="http://ice2.somafm.com/suburbsofgoa-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/suburbsofgoa-64-aac" alt="http://ice2.somafm.com/suburbsofgoa-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/suburbsofgoa-32-aac" alt="http://ice2.somafm.com/suburbsofgoa-32-aac"/>-->
+        </channel>
+        <channel name="The Silent Channel" short="silent" pl_url="http://www.somafm.com/silent/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/silent120.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/silent-128-mp3" alt="http://ice2.somafm.com/silent-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/silent-128-aac" alt="http://ice2.somafm.com/silent-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/silent-64-aac" alt="http://ice2.somafm.com/silent-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/silent-32-aac" alt="http://ice2.somafm.com/silent-32-aac"/>-->
+        </channel>
+        <channel name="The Trip" short="thetrip" pl_url="http://www.somafm.com/thetrip/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/thetrip120.jpg"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/thetrip-128-mp3" alt="http://ice2.somafm.com/thetrip-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/thetrip-64-aac" alt="http://ice2.somafm.com/thetrip-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/thetrip-32-aac" alt="http://ice2.somafm.com/thetrip-32-aac"/>-->
+        </channel>
+        <channel name="ThistleRadio" short="thistle" pl_url="http://www.somafm.com/thistle/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/thistle120.png"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/thistle-128-mp3" alt="http://ice2.somafm.com/thistle-128-mp3"/>
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/thistle-64-aac" alt="http://ice2.somafm.com/thistle-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/thistle-32-aac" alt="http://ice2.somafm.com/thistle-32-aac"/>-->
+        </channel>
+        <channel name="Underground 80s" short="u80s" pl_url="http://www.somafm.com/u80s/songhistory.html">
+            <doScrape>false</doScrape>
+            <icon resource="/images/channel_icons/u80s-120.png"/>
+            <stream type="mp3:256k" url="http://ice1.somafm.com/u80s-256-mp3" alt="http://ice2.somafm.com/u80s-256-mp3"/>
+            <stream type="mp3:128k" url="http://ice1.somafm.com/u80s-128-mp3" alt="http://ice2.somafm.com/u80s-128-mp3"/>
+            <!--<stream type="aac:128k" url="http://ice1.somafm.com/u80s-128-aac" alt="http://ice2.somafm.com/u80s-128-aac"/>-->
+            <!--<stream type="aac:64k" url="http://ice1.somafm.com/u80s-64-aac" alt="http://ice2.somafm.com/u80s-64-aac"/>-->
+            <!--<stream type="aac:32k" url="http://ice1.somafm.com/u80s-32-aac" alt="http://ice2.somafm.com/u80s-32-aac"/>-->
+        </channel>
+        <channel name="Xmas in Frisko" short="xmasinfrisko" pl_url="http://www.somafm.com/xmasinfrisko/songhistory.html">
+            <doScrape>false</doScrape>
+        </channel>
+        <channel name="Christmas Rocks!" short="xmasrocks" pl_url="http://www.somafm.com/xmasrocks/songhistory.html">
+            <doScrape>false</doScrape>
+        </channel>
+    </channels>
+</scraper>

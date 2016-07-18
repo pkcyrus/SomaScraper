@@ -1,0 +1,16 @@
+group 'com.pskehagias'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.jsoup:jsoup:1.9.1'
+    compile 'org.xerial:sqlite-jdbc:3.8.11.2'
+    compile 'com.sun.mail:javax.mail:1.5.5'
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}

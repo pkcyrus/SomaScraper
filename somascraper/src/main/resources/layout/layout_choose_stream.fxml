@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:controller="soma.ui.ControllerChooseStream"
+          xmlns:fx="http://javafx.com/fxml"
+          alignment="center"
+          spacing="10">
+    <padding>
+        <Insets top="25" bottom="25" left="25" right="25"/>
+    </padding>
+
+    <ListView fx:id="stream_select" onMouseClicked="#onClicks"/>
+
+    <Button text="Play" fx:id="button_play" onAction="#onPlay"/>
+
+</VBox>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox
+      xmlns:fx="http://javafx.com/fxml"
+      spacing="10">
+    <padding>
+        <Insets top="25" right="25" bottom="10" left="25"/>
+    </padding>
+
+    <children>
+        <GridPane hgap="10" vgap="10" alignment="CENTER">
+
+            <Label GridPane.rowIndex="2" GridPane.columnIndex="0"
+                   text="Stream buffer size (kBytes)"/>
+            <TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="buffer_size"/>
+
+            <CheckBox GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2" fx:id="record_streams"
+                    text="Save streamed audio recordings." selected="true"/>
+
+            <Label GridPane.rowIndex="4" GridPane.columnIndex="0"
+                    text="Save directory for audio recordings"/>
+            <TextField GridPane.rowIndex="4" GridPane.columnIndex="1" fx:id="recording_directory"/>
+
+        </GridPane>
+    </children>
+
+</HBox>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.input.KeyCombination?>
+<?import javafx.scene.image.ImageView?>
+<BorderPane fx:id="main_root" fx:controller="soma.ui.ControllerLaunch"
+            xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <VBox>
+        <MenuBar BorderPane.alignment="TOP_LEFT">
+            <menus>
+                <Menu text="_File" mnemonicParsing="true">
+                    <MenuItem text="_Configure" onAction="#onConfigure">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="C"/>
+                        </accelerator>
+                    </MenuItem>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="_Export Selection" onAction="#onExportPlaylist">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="E"/>
+                        </accelerator>
+                    </MenuItem>
+                    <MenuItem text="Export All" onAction="#onExportAllPlaylist">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" code="E"/>
+                        </accelerator>
+                    </MenuItem>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="E_xit" onAction="#onExit"/>
+                </Menu>
+                <Menu text="_Scrape" mnemonicParsing="true">
+                    <MenuItem text="Scrape Selection" onAction="#onScrape">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="D"/>
+                        </accelerator>
+                    </MenuItem>
+                    <MenuItem text="Scrape _All" onAction="#onAllScrape">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" code="D"/>
+                        </accelerator>
+                    </MenuItem>
+                </Menu>
+                <Menu text="_Music" mnemonicParsing="true">
+                    <MenuItem text="Bro_wse" onAction="#onBrowse">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="B"/>
+                        </accelerator>
+                    </MenuItem>
+                    <MenuItem text="Search" onAction="#onSearch">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="F"/>
+                        </accelerator>
+                    </MenuItem>
+                </Menu>
+            </menus>
+        </MenuBar>
+        </VBox>
+    </top>
+    <bottom>
+        <VBox fx:id="work_bar_box">
+            <HBox>
+                <padding><Insets left="5" right="5" top="5" bottom="5"/></padding>
+                <ProgressBar fx:id="work_bar" prefWidth="100" progress="0"/>
+                <Label fx:id="work_label"/>
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>

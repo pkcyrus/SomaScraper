@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox fx:id="main_root" fx:controller="soma.ui.ControllerStreamMusic"
+          xmlns:fx="http://javafx.com/fxml"
+          alignment="CENTER_LEFT"
+          spacing="10">
+    <padding>
+        <Insets top="5" bottom="5" left="5" right="5"/>
+    </padding>
+
+    <Button fx:id="play_pause" onAction="#onPlayPause" text="Play"/>
+    <Button fx:id="stop" onAction="#onStop" text="Stop" disable="true"/>
+    <Slider fx:id="volume" prefWidth="100" max="1" value="1" min="0"/>
+
+    <Label fx:id="channel_name" text=""/>
+    <Label fx:id="channel_format" text=""/>
+</HBox>

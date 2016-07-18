@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:id="main_root" fx:controller="soma.ui.ControllerChannelsCheck"
+          xmlns:fx="http://javafx.com/fxml"
+          alignment="center" hgap="10" vgap="10">
+    <padding>
+        <Insets top="25" right="25" bottom="10" left="25"/>
+    </padding>
+
+    <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
+
+    <children>
+        <Label fx:id="channels_label"
+            GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"
+            text="Channels"/>
+        <ListView fx:id="channels_list"
+            GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+        <Button fx:id="button_toggle_all"
+            GridPane.rowIndex="2" GridPane.columnIndex="0"
+            text="Invert Selection"
+            onAction="#onToggleSelection"/>
+        <Button fx:id="button_check_uncheck"
+            GridPane.rowIndex="2" GridPane.columnIndex="1"
+            text="Check/Uncheck All"
+            onAction="#onCheckUncheck"/>
+    </children>
+</GridPane>
