@@ -14,3 +14,18 @@ dependencies {
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
+
+task makeCopy(type : Copy){
+    into "$buildDir/libs/"
+    from configurations.runtime
+}
+
+build.dependsOn makeCopy
+
+jar {
+    manifest {
+        attributes(
+                "Class-Path": configurations.compile.collect { it.getName() }.join(' '),
+                "Main-Class": 'soma.Main')
+    }
+}
