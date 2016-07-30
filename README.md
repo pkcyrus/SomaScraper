@@ -5,15 +5,15 @@ I am in no way affiliated with SomaFM, this project is an independent work.  I d
 
 ## Build
 Build requires <a href="http://gradle.org">gradle</a> and JDK8 or greater.
-
--navigate to /somascraper/
--gradle build
-
+<ul>
+<li>navigate to /somascraper/</li>
+<li>gradle build</li>
+</ul>
 If you're building for Raspberry PI, or any other Arm based platform, there are some extra dependencies to get the project running.
-
--<a href="https://wiki.openjdk.java.net/display/OpenJFX/Main">OpenJFX</a>, as Oracle no longer includes it with ARM distributions.
--You have to build <a href="https://github.com/xerial/sqlite-jdbc">sqlite-jdbc</a> yourself from it's repository (3.13.0 as of 7/30/16) as the release version has improperly built binaries for the ARMHF architecture.
-
+<ul>
+<li><a href="https://wiki.openjdk.java.net/display/OpenJFX/Main">OpenJFX</a>, as Oracle no longer includes it with ARM distributions.</li>
+<li>You have to build <a href="https://github.com/xerial/sqlite-jdbc">sqlite-jdbc</a> yourself from it's repository (3.13.0 as of 7/30/16) as the release version has improperly built binaries for the ARMHF architecture.</li>
+</ul>
 ## Use 
 Scraping is automated through windows' task scheduler and a .bat file.  You'll want to set this up yourself depending on your system.  I found running the scraper every 30 minutes is a good balance between aggressive and not missing songs as they're played.
 
