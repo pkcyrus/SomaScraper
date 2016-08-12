@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<HBox fx:id="main_root" fx:controller="soma.ui.ControllerStreamMusic"
+<HBox fx:id="main_root" fx:controller="com.pskehagias.soma.ui.ControllerStreamMusic"
           xmlns:fx="http://javafx.com/fxml"
           alignment="CENTER_LEFT"
           spacing="10">

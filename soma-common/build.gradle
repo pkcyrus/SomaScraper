@@ -1,0 +1,22 @@
+apply plugin: 'java'
+
+group 'com.pskehagias'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories{
+    mavenCentral()
+}
+
+dependencies{
+    compile 'org.xerial:sqlite-jdbc:3.8.11.2'
+    compile 'mysql:mysql-connector-java:6.0.3'
+}
+
+jar{
+    destinationDir = new File("$buildDir/libs/lib")
+}

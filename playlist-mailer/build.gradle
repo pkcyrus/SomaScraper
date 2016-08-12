@@ -1,0 +1,28 @@
+apply plugin: 'java'
+
+group 'com.pskehagias'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories{
+    mavenCentral()
+}
+
+dependencies{
+    compile project(':soma-common')
+    compile 'mysql:mysql-connector-java:6.0.3'
+    compile 'org.xerial:sqlite-jdbc:3.8.11.2'
+    compile 'com.sun.mail:javax.mail:1.5.5'
+}
+
+jar {
+    manifest {
+        attributes(
+                "Class-Path": configurations.compile.collect { "lib/" + it.getName() }.join(' '),
+                "Main-Class": 'com.pskehagias.soma.SQLitePlaylistMailer')
+    }
+}

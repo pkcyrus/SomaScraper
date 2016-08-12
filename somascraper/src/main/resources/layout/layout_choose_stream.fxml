@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<VBox fx:controller="soma.ui.ControllerChooseStream"
+<VBox fx:controller="com.pskehagias.soma.ui.ControllerChooseStream"
           xmlns:fx="http://javafx.com/fxml"
           alignment="center"
           spacing="10">

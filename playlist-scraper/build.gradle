@@ -1,0 +1,20 @@
+group 'com.pskehagias'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories{
+    mavenCentral()
+}
+
+dependencies{
+    compile 'org.jsoup:jsoup:1.9.1'
+    compile project(':soma-common')
+}
+
+jar{
+    destinationDir = new File("$buildDir/libs/lib")
+}

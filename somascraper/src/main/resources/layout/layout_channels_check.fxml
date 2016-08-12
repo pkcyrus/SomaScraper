@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<GridPane fx:id="main_root" fx:controller="soma.ui.ControllerChannelsCheck"
+<GridPane fx:id="main_root" fx:controller="com.pskehagias.soma.ui.ControllerChannelsCheck"
           xmlns:fx="http://javafx.com/fxml"
           alignment="center" hgap="10" vgap="10">
     <padding>
@@ -24,16 +22,16 @@
     </rowConstraints>
 
     <children>
-        <Label fx:id="channels_label"
+        <Label
             GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"
             text="Channels"/>
         <ListView fx:id="channels_list"
             GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-        <Button fx:id="button_toggle_all"
+        <Button
             GridPane.rowIndex="2" GridPane.columnIndex="0"
             text="Invert Selection"
             onAction="#onToggleSelection"/>
-        <Button fx:id="button_check_uncheck"
+        <Button
             GridPane.rowIndex="2" GridPane.columnIndex="1"
             text="Check/Uncheck All"
             onAction="#onCheckUncheck"/>

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <?import javafx.scene.image.ImageView?>
-<GridPane fx:id="main_root" fx:controller="soma.ui.ControllerChannelInfo"
+<GridPane fx:id="main_root" fx:controller="com.pskehagias.soma.ui.ControllerChannelInfo"
           xmlns:fx="http://javafx.com/fxml"
           hgap="10" vgap="5" alignment="BASELINE_CENTER">
     <padding><Insets top="10" bottom="15" left="10" right="10"/></padding>

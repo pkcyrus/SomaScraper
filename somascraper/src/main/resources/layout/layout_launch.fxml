@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <?import javafx.scene.input.KeyCodeCombination?>
-<?import javafx.scene.input.KeyCombination?>
-<?import javafx.scene.image.ImageView?>
-<BorderPane fx:id="main_root" fx:controller="soma.ui.ControllerLaunch"
+<BorderPane fx:id="main_root" fx:controller="com.pskehagias.soma.ui.ControllerLaunch"
             xmlns:fx="http://javafx.com/fxml">
     <top>
         <VBox>

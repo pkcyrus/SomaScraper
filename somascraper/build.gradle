@@ -1,0 +1,33 @@
+group 'com.pskehagias'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':soma-common')
+    compile project(':playlist-scraper')
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+task makeCopy(type : Copy){
+    into "$buildDir/libs/lib"
+    from configurations.runtime
+}
+
+build.dependsOn makeCopy
+
+jar {
+    manifest {
+        attributes(
+                "Class-Path": configurations.compile.collect { "lib/" + it.getName() }.join(' '),
+                "Main-Class": 'com.pskehagias.soma.Main')
+    }
+}
