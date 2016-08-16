@@ -10,11 +10,26 @@ repositories{
     mavenCentral()
 }
 
+configurations{
+    soupcans
+    compile.extendsFrom soupcans
+}
+
 dependencies{
-    compile 'org.jsoup:jsoup:1.9.1'
+    soupcans 'org.jsoup:jsoup:1.9.1'
     compile project(':soma-common')
 }
 
+task makeCopy(type : Copy){
+    into "$rootDir/output/lib"
+    from configurations.soupcans
+}
+
+build.dependsOn makeCopy
+
 jar{
-    destinationDir = new File("$buildDir/libs/lib")
+    destinationDir = new File("$rootDir/output/lib")
+    manifest{
+        attributes("Main-Class": '')
+    }
 }

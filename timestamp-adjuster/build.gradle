@@ -14,13 +14,14 @@ repositories{
 
 dependencies{
     compile project(':soma-common')
+    compile 'org.xerial:sqlite-jdbc:3.8.11.2'
 }
 
 jar {
-    destinationDir = new File("$rootDir/output/")
+    destinationDir = new File("$rootDir/output")
     manifest {
         attributes(
                 "Class-Path": configurations.compile.collect { "lib/" + it.getName() }.join(' '),
-                "Main-Class": 'com.pskehagias.soma.SQLiteToMysqlMigrator')
+                "Main-Class": 'com.pskehagias.soma.TimestampAdjuster')
     }
 }

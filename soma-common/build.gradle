@@ -12,11 +12,28 @@ repositories{
     mavenCentral()
 }
 
-dependencies{
-    compile 'org.xerial:sqlite-jdbc:3.8.11.2'
-    compile 'mysql:mysql-connector-java:6.0.3'
+configurations{
+    sqlbin
+    compile.extendsFrom sqlbin
 }
 
-jar{
-    destinationDir = new File("$buildDir/libs/lib")
+dependencies{
+    sqlbin 'org.xerial:sqlite-jdbc:3.8.11.2'
+    sqlbin 'mysql:mysql-connector-java:6.0.3'
 }
+
+task makeCopy(type : Copy){
+    into "$rootDir/output/lib"
+    from configurations.sqlbin
+}
+
+build.dependsOn makeCopy
+
+jar{
+    destinationDir = new File("$rootDir/output/lib")
+    manifest{
+        attributes("Main-Class": '')
+    }
+}
+
+jar << { println "The common jar has been fucked!" }

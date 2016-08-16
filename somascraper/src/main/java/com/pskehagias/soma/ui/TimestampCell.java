@@ -4,24 +4,24 @@ import javafx.scene.control.TableCell;
 import com.pskehagias.soma.common.Play;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.OffsetTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
  * Created by Peter on 7/17/2016.
- * Formats the milliseconds from epoch timestamp into a human readable format
+ * Formats the milliseconds from epoch timestamp into a human readable format.
  */
 public class TimestampCell extends TableCell<Play, Long> {
-    public static final SimpleDateFormat dateFormat = getDateFormat();
-
-    public static SimpleDateFormat getDateFormat() {
-        return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-    }
+    public static final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
 
     @Override
     protected void updateItem(Long item, boolean empty) {
         if (!empty) {
-            Date date = new Date(item);
-            setText(dateFormat.format(date));
+            OffsetDateTime odt = OffsetDateTime.ofInstant(Instant.ofEpochMilli(item), OffsetTime.now().getOffset());
+            setText(odt.format(dateTimeFormat));
         } else
             setText("");
     }

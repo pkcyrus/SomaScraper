@@ -1,30 +1,39 @@
 package com.pskehagias.soma.util;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.*;
 
 /**
  * Created by pkcyr on 8/9/2016.
+ * Utilities for interpreting the play times of scraped playlist data as UTC timestamps.
  */
 public class ParseTime {
-    static SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
 
+    /**
+     * Parses the time, given in standard "HH:mm:ss" format, to a UTC timestamp in milliseconds past the epoch.
+     * This method is a convenience for somascraper which makes the assumption that incoming time strings are PST/PDT
+     * and represent a time within the last 24 hours.
+     * @param time A string representing a time of day in "HH:mm:ss" format.
+     * @return A representation of time in milliseconds past the epoch in UTC
+     */
     public static long convertTimeToMillis(String time) {
-        Calendar now = Calendar.getInstance();
-        try {
-            Date playtime = df.parse(time);
-            if(now.get(Calendar.HOUR_OF_DAY) < playtime.getHours()) {
-                now.set(Calendar.DATE, now.get(Calendar.DATE)-1);
-            }
-            now.set(Calendar.HOUR_OF_DAY, playtime.getHours());
-            now.set(Calendar.MINUTE, playtime.getMinutes());
-            now.set(Calendar.SECOND, playtime.getSeconds());
-            now.set(Calendar.MILLISECOND, 0);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        return parseFromOffsetToUTCAsToday(time, ZoneId.SHORT_IDS.get("PST")).toInstant().toEpochMilli();
+    }
+
+    /**
+     * Parses the time, given in standard "HH:mm:ss" format, to an OffsetDateTime representing a day in the last
+     * 24 hours and the given timezone.
+     * @param time A string representing a time of day in "HH:mm:ss" format.
+     * @param zoneId The ZoneId of the timezone to set the result to.
+     * @return An OffsetDateTime object representing the requested time string.
+     */
+    public static OffsetDateTime parseFromOffsetToUTCAsToday(String time, String zoneId){
+        LocalTime parsed = LocalTime.parse(time);
+        OffsetTime now = OffsetTime.now(ZoneId.of(zoneId));
+        OffsetTime offsetTime = parsed.atOffset(now.getOffset());
+        OffsetDateTime offsetDateTime = offsetTime.atDate(LocalDate.now());
+        if(now.isBefore(offsetTime)){
+            offsetDateTime.minusDays(1);
         }
-        return now.getTimeInMillis();
+        return offsetDateTime;
     }
 }
