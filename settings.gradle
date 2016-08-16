@@ -1,1 +1,2 @@
 include ':somascraper', ':playlist-scraper', ':soma-common', ':migrate-mysql', ':playlist-mailer', ':timestamp-adjuster'
+include ':scrape-mysql'
