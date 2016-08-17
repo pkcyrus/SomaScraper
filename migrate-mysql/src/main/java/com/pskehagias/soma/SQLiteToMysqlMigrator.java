@@ -1,6 +1,7 @@
 package com.pskehagias.soma;
 
 import com.pskehagias.soma.common.Play;
+import com.pskehagias.soma.data.InsertHelper;
 import com.pskehagias.soma.data.SomaInsertHelper;
 import com.pskehagias.soma.data.SomaMysqlHelper;
 import com.pskehagias.soma.data.SomaSQLiteHelper;
@@ -35,8 +36,8 @@ public class SQLiteToMysqlMigrator {
 
             try(Connection sqlite = sqLiteHelper.getConnection();
                 PreparedStatement getPlays = sqlite.prepareStatement(SELECT_ALL_PLAYS);
-                ResultSet allPlays = getPlays.executeQuery();
-                SomaInsertHelper inserter = new SomaInsertHelper(mysqlHelper)) {
+                ResultSet allPlays = getPlays.executeQuery()) {
+                InsertHelper inserter = new SomaInsertHelper(mysqlHelper);
 
                 inserter.begin();
                 while (allPlays.next()) {
@@ -48,9 +49,9 @@ public class SQLiteToMysqlMigrator {
                     inserter.addPlay(play);
                 }
                 inserter.commit();
-
+                inserter.close();
             }
-        }catch(SQLException e){
+        } catch(SQLException e){
             e.printStackTrace();
         }
     }

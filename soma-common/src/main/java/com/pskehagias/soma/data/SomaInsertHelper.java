@@ -5,6 +5,7 @@ import com.pskehagias.soma.common.Channel;
 import com.pskehagias.soma.common.Play;
 
 import java.io.Closeable;
+import java.io.IOException;
 import java.sql.*;
 
 /**
@@ -12,7 +13,7 @@ import java.sql.*;
  *
  *
  */
-public class SomaInsertHelper implements Closeable{
+public class SomaInsertHelper implements InsertHelper{
     private DBOpenHelper dbOpenHelper;
     private Connection connection;
 
@@ -21,6 +22,7 @@ public class SomaInsertHelper implements Closeable{
         this.connection = null;
     }
 
+    @Override
     public void begin() throws SQLException{
         if(connection != null){
             return;
@@ -30,6 +32,7 @@ public class SomaInsertHelper implements Closeable{
         connection.setAutoCommit(false);
     }
 
+    @Override
     public void commit() throws SQLException{
         if(connection == null){
             return;
@@ -37,15 +40,11 @@ public class SomaInsertHelper implements Closeable{
         connection.commit();
     }
 
-    public void close(){
-        try {
-            connection.commit();
-            connection.close();
-            connection = null;
-        } catch (SQLException e) {
-            System.err.println("Error closing database connection.");
-            e.printStackTrace();
-        }
+    @Override
+    public void close() throws SQLException{
+        connection.commit();
+        connection.close();
+        connection = null;
     }
 
     public static final String ADD_PLAY =
@@ -65,6 +64,7 @@ public class SomaInsertHelper implements Closeable{
     public static final String ADD_CHANNEL =
             "INSERT  IGNORE INTO channels ( name, pl_url ) values ( ?,? )";
 
+    @Override
     public long addChannel(Channel c) throws SQLException{
         if(connection == null){
             throw new SQLException("No connection established to the database");
@@ -77,6 +77,7 @@ public class SomaInsertHelper implements Closeable{
         }
     }
 
+    @Override
     public long addPlay(Play play) throws SQLException{
         if(connection == null){
             throw new SQLException("No connection established to the database");
@@ -91,6 +92,7 @@ public class SomaInsertHelper implements Closeable{
         }
     }
 
+    @Override
     public long addSong(String name, String album, String artist) throws SQLException{
         if(connection == null){
             throw new SQLException("No connection established to the database");
@@ -104,6 +106,7 @@ public class SomaInsertHelper implements Closeable{
         }
     }
 
+    @Override
     public long addAlbum(String name, String artist) throws SQLException{
         if(connection == null){
             throw new SQLException("No connection established to the database");
@@ -116,6 +119,7 @@ public class SomaInsertHelper implements Closeable{
         }
     }
 
+    @Override
     public long addArtist(String name) throws SQLException{
         if(connection == null){
             throw new SQLException("No connection established to the database");

@@ -1,5 +1,6 @@
 package com.pskehagias.soma.data;
 
+import com.pskehagias.soma.common.Channel;
 import com.pskehagias.soma.common.Play;
 import com.pskehagias.soma.data.SomaSQLiteHelper;
 
@@ -14,13 +15,23 @@ import java.util.List;
 /**
  * Created by Peter on 6/10/2016.
  */
-public class SomaDBManager implements Closeable{
+public class SomaDBManager implements Closeable, InsertHelper{
     private Connection connection;
 
     public SomaDBManager()throws SQLException{
         connection = new SomaSQLiteHelper().getConnection();
     }
 
+    @Override
+    public long addChannel(Channel channel) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public void begin(){}
+    @Override
+    public void commit(){}
+    @Override
     public void close() {
         try {
             connection.close();
@@ -120,21 +131,23 @@ public class SomaDBManager implements Closeable{
 
     public static final String ADD_ARTIST =
             "INSERT INTO artists ( name ) values ( ? )";
-
-    public void addArtist(String name) {
+    @Override
+    public long addArtist(String name) {
         try (PreparedStatement statement = connection.prepareStatement(ADD_ARTIST)) {
             statement.setString(1, name);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     public static final String ADD_ALBUM =
             "INSERT INTO albums ( artist_id, name ) " +
                     "values ((SELECT _id FROM artists WHERE name=?),? )";
 
-    public void addAlbum(String album, String artist) {
+    @Override
+    public long addAlbum(String album, String artist) {
         try (PreparedStatement statement = connection.prepareStatement(ADD_ALBUM)) {
             statement.setString(1, artist);
             statement.setString(2, album);
@@ -142,6 +155,7 @@ public class SomaDBManager implements Closeable{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     public static final String ADD_SONG =
@@ -155,7 +169,8 @@ public class SomaDBManager implements Closeable{
     public static final String ADD_SONG_FTS =
             "INSERT INTO fts_tracks (docid,artist,album,song)" +
             "VALUES(?,?,?,?)";
-    public void addSong(String song, String album, String artist) {
+    @Override
+    public long addSong(String song, String album, String artist) {
         try (PreparedStatement statement = connection.prepareStatement(ADD_SONG)) {
             statement.setString(1, song);
             statement.setString(2, album);
@@ -180,12 +195,13 @@ public class SomaDBManager implements Closeable{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     public static final String UPDATE_RATING =
             "UPDATE song_ratings SET rating = ? WHERE _id= ?";
 
-    public void updateRating(Play item){
+    public long updateRating(Play item){
         try(PreparedStatement statement = connection.prepareStatement(UPDATE_RATING)){
             statement.setInt(1,item.getRating());
             statement.setLong(2,item.getSongId());
@@ -193,6 +209,7 @@ public class SomaDBManager implements Closeable{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     public static final String ADD_PLAY =
@@ -200,7 +217,7 @@ public class SomaDBManager implements Closeable{
                     "SELECT ?, songs._id, channels._id " +
                     "FROM songs inner join channels where channels.name = ? and songs.name = ?";
 
-    public void addPlay(String song, String channel, long timestamp) {
+    public long addPlay(String song, String channel, long timestamp) {
         try (PreparedStatement statement = connection.prepareStatement(ADD_PLAY)) {
             statement.setLong(1, timestamp);
             statement.setString(2, channel);
@@ -209,6 +226,7 @@ public class SomaDBManager implements Closeable{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     public static final String SELECT_CHANNEL =
@@ -307,7 +325,8 @@ public class SomaDBManager implements Closeable{
         }
     }
 
-    public void addPlay(Play play) throws SQLException {
+    @Override
+    public long addPlay(Play play) throws SQLException {
         connection.setAutoCommit(false);
 
         if (!checkIfArtistExists(play.getArtist())) {
@@ -336,6 +355,7 @@ public class SomaDBManager implements Closeable{
         connection.commit();
         connection.setAutoCommit(true);
 
+        return 0;
     }
 
     public void addAllPlays(List<Play> plays) throws SQLException {
@@ -373,12 +393,13 @@ public class SomaDBManager implements Closeable{
 
     public static final String RATE_SONG =
             "INSERT INTO song_ratings(_id,rating) VALUES(?,?)";
-    public void rateSong(int _id, int rating)throws SQLException{
+    public long rateSong(int _id, int rating)throws SQLException{
         try(PreparedStatement statement = connection.prepareStatement(RATE_SONG)){
             statement.setInt(1,_id);
             statement.setInt(2,rating);
             statement.executeUpdate();
         }
+        return 0;
     }
 
 }

@@ -29,19 +29,17 @@ public class ScrapeCommandTool {
 
         SomaMysqlHelper helper = new SomaMysqlHelper(args[0], args[1]);
         helper.setCredentials(args[2], args[3]);
+        SomaInsertHelper inserter = new SomaInsertHelper(helper);
 
-        try (SomaInsertHelper inserter = new SomaInsertHelper(helper)) {
-
-            inserter.begin();
-            for (Play p : plays) {
-                inserter.addArtist(p.getArtist());
-                inserter.addAlbum(p.getAlbum(), p.getArtist());
-                inserter.addSong(p.getSong(), p.getAlbum(), p.getArtist());
-                inserter.addPlay(p);
-            }
-            inserter.commit();
-
+        inserter.begin();
+        for (Play p : plays) {
+            inserter.addArtist(p.getArtist());
+            inserter.addAlbum(p.getAlbum(), p.getArtist());
+            inserter.addSong(p.getSong(), p.getAlbum(), p.getArtist());
+            inserter.addPlay(p);
         }
+        inserter.commit();
+        inserter.close();
     }
 
     public static void printusage(){
