@@ -13,24 +13,28 @@ import java.time.Duration;
 public class TimestampAdjuster {
     public static void main(String[] args){
         SomaSQLiteHelper sqh = new SomaSQLiteHelper();
-        try{
-            Connection c = sqh.getConnection();
-
+        try(Connection c = sqh.getConnection();
             Statement count = c.createStatement();
-            ResultSet resultSet = count.executeQuery("select count(*) from plays");
-            if(resultSet.next())
-                System.out.println("There are " + resultSet.getLong(1) + " rows to update...");
-            resultSet.close();
-            count.close();
+            ResultSet resultSet = count.executeQuery("select count(*) from plays")){
 
-            PreparedStatement statement = c.prepareStatement("update plays set timestamp = timestamp + ?");
-            statement.setLong(1, Duration.ofHours(7).toMillis()-1);
-            long result = statement.executeUpdate();
-            System.out.println("Updated " + result + " rows");
-            statement.close();
-            c.close();
+            if(resultSet.next()) {
+                System.out.println("There are " + resultSet.getLong(1) + " rows to update...");
+            }else{
+                System.err.println("Could not access the table 'plays'");
+                return;
+            }
+
+            try(PreparedStatement statement = c.prepareStatement("update plays set timestamp = timestamp + ?")) {
+                statement.setLong(1, Duration.ofHours(7).toMillis() - 1);
+
+                System.out.println("Please wait, modifying timestamps...");
+
+                long result = statement.executeUpdate();
+                System.out.println("Updated " + result + " rows");
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error accessing the database.");
+            System.err.println(e.getMessage());
         }
     }
 }
