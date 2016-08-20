@@ -32,7 +32,7 @@ public class ParseTime {
         OffsetTime offsetTime = parsed.atOffset(now.getOffset());
         OffsetDateTime offsetDateTime = offsetTime.atDate(LocalDate.now());
         if(now.isBefore(offsetTime)){
-            offsetDateTime.minusDays(1);
+            offsetDateTime = offsetDateTime.minusDays(1);
         }
         return offsetDateTime;
     }
