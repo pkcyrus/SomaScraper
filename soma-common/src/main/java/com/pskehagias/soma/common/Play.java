@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 /**
  * Created by Peter on 6/10/2016.
  */
-public class Play {
+public class Play implements RatingSource {
     private final SimpleLongProperty timestamp;
     private final SimpleStringProperty artist;
     private final SimpleStringProperty album;
@@ -55,8 +55,11 @@ public class Play {
     public long getChannelId(){return channelId.get();}
     public void setChannelId(long value){channelId.set(value);}
 
+    @Override
     public SimpleIntegerProperty ratingProperty(){return rating;}
+    @Override
     public int getRating(){return rating.get();}
+    @Override
     public void setRating(int rating){this.rating.set(rating);}
 
     public SimpleLongProperty timestampProperty(){return timestamp;}
