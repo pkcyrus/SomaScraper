@@ -6,7 +6,6 @@ import com.pskehagias.soma.util.ParseTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.xml.sax.SAXException;
 import com.pskehagias.soma.async.ProgressCallback;
 
 import java.io.IOException;
@@ -50,7 +49,7 @@ public class Scraper {
         List<Play> result = new ArrayList<>(50);
 
         long work = 0;
-        final long tWork = channels.stream().filter(channel -> channel.getDoScrape()).count();
+        final long tWork = channels.stream().filter(Channel::getDoScrape).count();
         if(callback != null)
             callback.updateCallback(work,tWork);
         for(Channel c : channels){

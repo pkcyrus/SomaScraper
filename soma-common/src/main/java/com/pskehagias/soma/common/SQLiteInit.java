@@ -1,7 +1,5 @@
 package com.pskehagias.soma.common;
 
-import com.pskehagias.soma.common.Channel;
-import com.pskehagias.soma.common.Configuration;
 import com.pskehagias.soma.data.SomaDBManager;
 
 import javax.xml.transform.TransformerException;
@@ -21,12 +19,10 @@ public class SQLiteInit implements Configuration.InitializerDelegate {
             for (Channel c : channels) {
                 scraper.addChannel(c.getName(), c.getUrl());
             }
-            channels.stream().forEach(it -> scraper.addChannel(it.getName(), it.getUrl()));
+
             config.setInitialized(true);
             config.saveConfiguration();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
+        } catch (SQLException | TransformerException e) {
             e.printStackTrace();
         }
     }

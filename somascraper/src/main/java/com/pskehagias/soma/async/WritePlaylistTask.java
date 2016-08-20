@@ -25,7 +25,13 @@ public class WritePlaylistTask extends Task<Void> {
 
     @Override
     protected Void call() throws Exception {
-        dbManager.addAllPlays(playList);
+        try {
+            dbManager.addAllPlays(playList);
+            dbManager.close();
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
         return null;
     }
 }

@@ -4,6 +4,7 @@ import com.pskehagias.soma.common.Channel;
 import com.pskehagias.soma.common.Configuration;
 import com.pskehagias.soma.common.Play;
 import com.pskehagias.soma.common.SQLiteInit;
+import com.pskehagias.soma.data.SomaDBSeeder;
 import com.pskehagias.soma.scraper.Scraper;
 import com.pskehagias.soma.util.ScrapeUrlToFilename;
 import javafx.application.Application;
@@ -42,6 +43,19 @@ public class Main extends Application {
     }
 
     public static void main(String[] args){
+
+        try {
+            SomaDBSeeder dbSeeder = new SomaDBSeeder(new SomaDBManager());
+            dbSeeder.seed();
+        } catch (SQLException e) {
+            System.err.println("Failed to open a connection to the sqlite database.");
+            System.err.println(e.getMessage());
+            return;
+        } catch (RuntimeException e){
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause().getMessage());
+        }
+
         if (args.length == 0 || args[0].equals("config")) {
             //config
             launch(args);
@@ -81,9 +95,7 @@ public class Main extends Application {
                     for(Channel c : channelList){
                         export(dbManager, new File("./playlist/"+ ScrapeUrlToFilename.filenameFromUrl(c.getUrl())), c.getName());
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (SAXException e) {
+                } catch (IOException | SAXException e) {
                     e.printStackTrace();
                 }
             }
@@ -100,11 +112,7 @@ public class Main extends Application {
             List<Play> result = scraper.scrapeAllNow(configuration.getChannels());
             dbManager.addAllPlays(result);
             return;
-        }catch (SAXException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        }catch (SAXException | SQLException | IOException e) {
             e.printStackTrace();
         }
         System.exit(1);

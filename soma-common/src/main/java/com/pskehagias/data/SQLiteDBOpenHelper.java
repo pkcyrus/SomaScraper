@@ -35,8 +35,7 @@ public abstract class SQLiteDBOpenHelper extends DBOpenHelper {
 
     @Override
     public Connection establishConnection() throws SQLException{
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:"+mName);
-        return connection;
+        return DriverManager.getConnection("jdbc:sqlite:"+mName);
     }
 
     @Override

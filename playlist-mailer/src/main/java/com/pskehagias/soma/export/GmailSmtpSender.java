@@ -58,7 +58,7 @@ public class GmailSmtpSender {
             System.out.println("Mail Sent Successfully");
             tr.close();
         } catch (SendFailedException sfe) {
-            System.out.println(sfe);
+            System.err.println(sfe.getMessage());
         }
     }
 }

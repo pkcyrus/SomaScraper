@@ -26,12 +26,11 @@ public class SomaDBSeeder implements com.pskehagias.data.DBSeeder {
             Configuration configuration = new Configuration(Configuration.FILE_USER);
             if (!configuration.isInitialized()) {
                 List<Channel> channels = configuration.getChannels();
-                insertHelper.begin();
+
                 for (Channel c : channels) {
                     insertHelper.addChannel(c);
                 }
-                insertHelper.commit();
-                insertHelper.close();
+
                 configuration.setInitialized(true);
                 configuration.saveConfiguration();
             }

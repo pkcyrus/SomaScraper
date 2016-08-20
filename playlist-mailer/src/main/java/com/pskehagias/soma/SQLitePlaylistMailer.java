@@ -47,9 +47,7 @@ public class SQLitePlaylistMailer {
             }
             GmailSmtpSender sender = new GmailSmtpSender();
             sender.sendMail(sendAcct, sendPass, destAcct, "./playlist/playlist.zip");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (javax.mail.MessagingException e) {
+        } catch (SQLException | javax.mail.MessagingException e) {
             e.printStackTrace();
         }
     }

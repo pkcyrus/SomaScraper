@@ -6,10 +6,7 @@ import com.pskehagias.soma.data.SomaInsertHelper;
 import com.pskehagias.soma.data.SomaMysqlHelper;
 import com.pskehagias.soma.data.SomaSQLiteHelper;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created by pkcyr on 8/11/2016.
@@ -34,25 +31,42 @@ public class SQLiteToMysqlMigrator {
             SomaMysqlHelper mysqlHelper = new SomaMysqlHelper(args[0],args[1]);
             mysqlHelper.setCredentials(args[2],args[3]);
 
-            try(Connection sqlite = sqLiteHelper.getConnection();
-                PreparedStatement getPlays = sqlite.prepareStatement(SELECT_ALL_PLAYS);
-                ResultSet allPlays = getPlays.executeQuery()) {
-                InsertHelper inserter = new SomaInsertHelper(mysqlHelper);
+            long total = 0;
+            long copied = 0;
 
-                inserter.begin();
-                while (allPlays.next()) {
-                    Play play = new Play(allPlays.getLong(1), allPlays.getString(2), allPlays.getString(3), allPlays.getString(4),
-                            allPlays.getString(5), 0, 0, 0, 0, 0);
-                    inserter.addArtist(play.getArtist());
-                    inserter.addAlbum(play.getAlbum(), play.getArtist());
-                    inserter.addSong(play.getSong(), play.getAlbum(), play.getArtist());
-                    inserter.addPlay(play);
+            try(Connection sqlite = sqLiteHelper.getConnection()) {
+                try(Statement statement = sqlite.createStatement();
+                    ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM plays")){
+                    if(resultSet.next()) {
+                        System.out.println("There are " + (total = resultSet.getLong(1)) + " rows to transfer...");
+                    }else{
+                        System.err.println("Could not access the table 'plays'");
+                        return;
+                    }
                 }
-                inserter.commit();
-                inserter.close();
+
+                try(PreparedStatement getPlays = sqlite.prepareStatement(SELECT_ALL_PLAYS);
+                    ResultSet allPlays = getPlays.executeQuery()) {
+                    InsertHelper inserter = new SomaInsertHelper(mysqlHelper);
+
+                    while (allPlays.next()) {
+                        Play play = new Play(allPlays.getLong(1), allPlays.getString(2), allPlays.getString(3), allPlays.getString(4),
+                                allPlays.getString(5), 0, 0, 0, 0, 0);
+                        inserter.addArtist(play.getArtist());
+                        inserter.addAlbum(play.getAlbum(), play.getArtist());
+                        inserter.addSong(play.getSong(), play.getAlbum(), play.getArtist());
+                        inserter.addPlay(play);
+
+                        System.out.print(++copied + "/" + total + "\r");
+                    }
+                    inserter.close();
+
+                    System.out.println("\nSuccessfully copied " + copied + " rows to the MySQL server.");
+                }
             }
         } catch(SQLException e){
-            e.printStackTrace();
+            System.err.println("Error attempting to copy play data from local SQL database to MySQL server.");
+            System.err.println(e.getMessage());
         }
     }
 }

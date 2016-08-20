@@ -19,6 +19,7 @@ public class ScrapeCommandTool {
     public static void scrapesqlite(List<Play> plays) throws SQLException {
         SomaDBManager sdb = new SomaDBManager();
         sdb.addAllPlays(plays);
+        sdb.close();
     }
 
     public static void scrapemysql(String[] args, List<Play> plays) throws SQLException {
@@ -31,14 +32,12 @@ public class ScrapeCommandTool {
         helper.setCredentials(args[2], args[3]);
         SomaInsertHelper inserter = new SomaInsertHelper(helper);
 
-        inserter.begin();
         for (Play p : plays) {
             inserter.addArtist(p.getArtist());
             inserter.addAlbum(p.getAlbum(), p.getArtist());
             inserter.addSong(p.getSong(), p.getAlbum(), p.getArtist());
             inserter.addPlay(p);
         }
-        inserter.commit();
         inserter.close();
     }
 
