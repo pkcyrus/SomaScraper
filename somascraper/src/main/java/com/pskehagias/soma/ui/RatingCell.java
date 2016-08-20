@@ -1,5 +1,6 @@
 package com.pskehagias.soma.ui;
 
+import com.pskehagias.soma.common.RatingSource;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.geometry.Insets;
@@ -13,7 +14,7 @@ import com.pskehagias.soma.common.Play;
 /**
  * Created by pkcyr on 7/14/2016.
  */
-public class RatingCell extends TableCell<Play, Integer> implements EventHandler<MouseEvent> {
+public class RatingCell extends TableCell<RatingSource, Integer> implements EventHandler<MouseEvent> {
     private static final Color[] barColor =
             {Color.DARKRED,
                     Color.RED,
@@ -48,7 +49,7 @@ public class RatingCell extends TableCell<Play, Integer> implements EventHandler
 
     @Override
     public void handle(MouseEvent event) {
-        EventType<MouseEvent> type = (EventType<MouseEvent>) event.getEventType();
+        EventType type = event.getEventType();
         Integer mouseRating = getRatingFromMouse(event.getX());
 
         if (type == MouseEvent.MOUSE_PRESSED) {

@@ -1,5 +1,6 @@
 package com.pskehagias.soma.ui;
 
+import com.pskehagias.soma.common.RatingSource;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,9 +31,9 @@ public class ControllerBrowse implements Controller, RatingCell.RatingUpdateCall
     @FXML private DatePicker date_range_max;
     @FXML private ComboBox<Integer> rating_cutoff;
 
-    @FXML private TableView result_table;
-    @FXML private TableColumn timestamp_column;
-    @FXML private TableColumn rating_column;
+    @FXML private TableView<Play> result_table;
+    @FXML private TableColumn<Play,Long> timestamp_column;
+    @FXML private TableColumn<RatingSource,Integer> rating_column;
     @FXML private Label label_result_count;
 
     private final SimpleLongProperty min_date;
@@ -74,25 +75,29 @@ public class ControllerBrowse implements Controller, RatingCell.RatingUpdateCall
     public void updateRating(int rowIndex, int value){
         Play item = results.get(rowIndex);
         item.setRating(value);
-        dbManager.updateRating(item);
+        try {
+            dbManager.updateRating(item);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void initialize(){
         channel_list.setItems(channels);
         result_table.setItems(results);
 
-        timestamp_column.setCellFactory(new Callback<TableColumn, TableCell>() {
+        timestamp_column.setCellFactory(new Callback<TableColumn<Play,Long>, TableCell<Play,Long>>() {
 
             @Override
-            public TableCell call(TableColumn param) {
+            public TimestampCell call(TableColumn param) {
                 return new TimestampCell();
             }
         });
 
         rating_column.setEditable(true);
-        rating_column.setCellFactory(new Callback<TableColumn, TableCell>() {
+        rating_column.setCellFactory(new Callback<TableColumn<RatingSource,Integer>, TableCell<RatingSource,Integer>>() {
             @Override
-            public TableCell call(TableColumn param) {
+            public RatingCell call(TableColumn param) {
                 return new RatingCell(ControllerBrowse.this);
             }
         });
@@ -139,10 +144,15 @@ public class ControllerBrowse implements Controller, RatingCell.RatingUpdateCall
     }
 
     public void loadPlaylist(String channelName){
-        List<Play> result = null;
+        List<Play> result;
         int minRating = rating_cutoff.getValue();
         if(check_use_date_range.isSelected()){
-            result = dbManager.getPlaylist(channelName, min_date.get(), max_date.get(), minRating);
+            try {
+                result = dbManager.getPlaylist(channelName, min_date.get(), max_date.get(), minRating);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return;
+            }
         }else {
             result = dbManager.getPlaylist(channelName, minRating);
         }
@@ -153,6 +163,6 @@ public class ControllerBrowse implements Controller, RatingCell.RatingUpdateCall
     }
 
     public Channel getSelectedChannel(){
-        return (Channel)channel_list.getSelectionModel().getSelectedItem();
+        return channel_list.getSelectionModel().getSelectedItem();
     }
 }

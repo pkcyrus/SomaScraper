@@ -1,5 +1,6 @@
 package com.pskehagias.soma.ui;
 
+import com.pskehagias.soma.common.RatingSource;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,7 +32,7 @@ public class ControllerSearch implements Controller, RatingCell.RatingUpdateCall
     @FXML private ComboBox<Integer> rating_cutoff;
 
     @FXML private TableView<Track> result_table;
-    @FXML private TableColumn rating_column;
+    @FXML private TableColumn<RatingSource,Integer> rating_column;
 
     @FXML private Label label_count;
     @FXML private Label label_result_count;
@@ -68,9 +69,9 @@ public class ControllerSearch implements Controller, RatingCell.RatingUpdateCall
 
     public void initialize(){
         channel_list.setItems(channels);
-        rating_column.setCellFactory(new Callback<TableColumn, TableCell>() {
+        rating_column.setCellFactory(new Callback<TableColumn<RatingSource, Integer>, TableCell<RatingSource,Integer>>() {
             @Override
-            public TableCell call(TableColumn param) {
+            public RatingCell call(TableColumn param) {
                 return new RatingCell(ControllerSearch.this);
             }
         });

@@ -17,7 +17,7 @@ import com.pskehagias.soma.common.Channel;
  */
 public class ControllerChannelsCheck {
     @FXML   public GridPane main_root;
-    @FXML   private ListView    channels_list;
+    @FXML   private ListView<Channel>    channels_list;
     private ObservableList<Channel> channels;
 
     public ControllerChannelsCheck(){

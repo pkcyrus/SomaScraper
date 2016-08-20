@@ -50,7 +50,6 @@ public class ControllerLaunch {
     private Node musicNode;
     private ControllerStreamMusic musicController;
 
-    private SomaSQLiteHelper dbHelper;
     private Configuration configuration;
     private ObservableList<Channel> channels;
 
@@ -85,7 +84,6 @@ public class ControllerLaunch {
             browseController = new ControllerBrowse();
             browseController.setChannels(configuration.getChannels());
 
-            dbHelper = new SomaSQLiteHelper();
             channels = FXCollections.observableArrayList(configuration.getChannels());
         } catch (IOException e) {
             e.printStackTrace();

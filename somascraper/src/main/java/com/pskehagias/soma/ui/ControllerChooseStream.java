@@ -38,9 +38,7 @@ public class ControllerChooseStream {
             configuration = new Configuration(Configuration.FILE_USER, new SQLiteInit());
             streams = FXCollections.observableArrayList();
             streams.addAll(configuration.getStreams());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
+        } catch (IOException | SAXException e) {
             e.printStackTrace();
         }
     }

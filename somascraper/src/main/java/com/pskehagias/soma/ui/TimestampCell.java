@@ -3,12 +3,10 @@ package com.pskehagias.soma.ui;
 import javafx.scene.control.TableCell;
 import com.pskehagias.soma.common.Play;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.OffsetTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 /**
  * Created by Peter on 7/17/2016.

@@ -42,9 +42,7 @@ public class ControllerConfig implements Controller, ControllerLaunch.ChannelSel
                     onSaveConfiguration();
                 });
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
+        } catch (IOException | SAXException e) {
             e.printStackTrace();
         }
 
