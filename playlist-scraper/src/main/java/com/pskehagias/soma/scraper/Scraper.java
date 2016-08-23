@@ -15,10 +15,25 @@ import java.util.*;
  * Created by Peter on 6/9/2016.
  */
 public class Scraper {
+    public static final long DEFAULT_DELAY = 250; // Delay in milliseconds
+
+    private long courtesyDelay;
     private ProgressCallback callback;
 
     public Scraper(ProgressCallback callback){
         this.callback = callback;
+        courtesyDelay = DEFAULT_DELAY;
+    }
+
+    public void setCourtesyDelay(long delay){
+        if(delay < 0){
+            throw new IllegalArgumentException("The delay parameter cannot be negative.");
+        }
+        courtesyDelay = delay;
+    }
+
+    public long getCourtesyDelay(){
+        return courtesyDelay;
     }
 
     public List<Play> scrapeChannel(Channel channel){
@@ -29,6 +44,7 @@ public class Scraper {
     }
 
     private List<Play> scrapeInternal(Channel channel) {
+        System.out.println("Scraping channel: " + channel.getName());
         List<Play> result = new ArrayList<>(30);
         try {
             Document document = Jsoup.connect(channel.getUrl()).timeout(10000).get();
@@ -37,7 +53,11 @@ public class Scraper {
                 Elements columns = songRows.get(idx).select("td");
                 if (columns.size() < 4)
                     continue;
-                result.add(new Play(ParseTime.convertTimeToMillis(columns.get(0).text()), columns.get(1).text(), columns.get(3).text(), columns.get(2).text(), channel.getName(), 0,0,0,0,0));
+
+                Play item = new Play(ParseTime.convertTimeToMillis(columns.get(0).text()),
+                        columns.get(1).text(), columns.get(3).text(), columns.get(2).text(), channel.getName(), 0,0,0,0,0);
+
+                result.add(item);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,6 +77,13 @@ public class Scraper {
                 result.addAll(scrapeInternal(c));
                 if(callback != null)
                     callback.updateCallback(++work,tWork);
+
+                try{
+                    Thread.sleep(courtesyDelay);
+                }catch (InterruptedException e){
+                    System.err.println("Error delaying the scrape between channels");
+                    System.err.println(e.getMessage());
+                }
             }
         }
         return result;

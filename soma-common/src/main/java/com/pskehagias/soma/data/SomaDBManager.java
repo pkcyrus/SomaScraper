@@ -138,18 +138,21 @@ public class SomaDBManager extends SomaInsertHelper{
     public long addSong(String song, String album, String artist) throws SQLException{
         long song_id = super.addSong(song, album, artist);
 
-        try (PreparedStatement ftsStatement = connection.prepareStatement(ADD_SONG_FTS)) {
-            ftsStatement.setLong(1, song_id);
-            ftsStatement.setString(2, song);
-            ftsStatement.setString(3, album);
-            ftsStatement.setString(4, artist);
-            ftsStatement.executeUpdate();
+        if(song_id > 0) {
+            try (PreparedStatement ftsStatement = connection.prepareStatement(ADD_SONG_FTS)) {
+                ftsStatement.setLong(1, song_id);
+                ftsStatement.setString(2, song);
+                ftsStatement.setString(3, album);
+                ftsStatement.setString(4, artist);
+                ftsStatement.executeUpdate();
+            }
+            try (PreparedStatement ratingStatement = connection.prepareStatement(ADD_SONG_RATING)) {
+                ratingStatement.setLong(1, song_id);
+                ratingStatement.setInt(2, 0);
+                ratingStatement.executeUpdate();
+            }
         }
-        try (PreparedStatement ratingStatement = connection.prepareStatement(ADD_SONG_RATING)){
-            ratingStatement.setLong(1,song_id);
-            ratingStatement.setInt(2,0);
-            ratingStatement.executeUpdate();
-        }
+
         return song_id;
     }
 
@@ -277,7 +280,10 @@ public class SomaDBManager extends SomaInsertHelper{
         }
     }
 
-    public void addAllPlays(List<Play> plays) throws SQLException {
+    @Override
+    public long addPlayAndDependents(List<Play> plays) throws SQLException {
+        long result = 0;
+
         if(connection == null){
             throw new SQLException("No connection established to the database");
         }
@@ -289,24 +295,26 @@ public class SomaDBManager extends SomaInsertHelper{
                 addAlbum(play.getAlbum(), play.getArtist());
                 addSong(play.getSong(), play.getAlbum(), play.getArtist());
                 addPlay(play.getSong(), play.getChannel(), play.getTimestamp());
-                incrementPlayCount(play);
+                incrementPlayCount(play); result++;
             }
             if (!checkIfAlbumExists(play.getArtist(), play.getAlbum())) {
                 addAlbum(play.getAlbum(), play.getArtist());
                 addSong(play.getSong(), play.getAlbum(), play.getArtist());
                 addPlay(play.getSong(), play.getChannel(), play.getTimestamp());
-                incrementPlayCount(play);
+                incrementPlayCount(play); result++;
             }
             if (!checkIfSongExists(play.getAlbum(), play.getSong())) {
                 addSong(play.getSong(), play.getAlbum(), play.getArtist());
                 addPlay(play.getSong(), play.getChannel(), play.getTimestamp());
-                incrementPlayCount(play);
+                incrementPlayCount(play); result++;
             }
             if (!checkIfPlayExists(play)) {
                 addPlay(play.getSong(), play.getChannel(), play.getTimestamp());
-                incrementPlayCount(play);
+                incrementPlayCount(play); result++;
             }
         }
+
+        return result;
     }
 
     public static final String RATE_SONG =

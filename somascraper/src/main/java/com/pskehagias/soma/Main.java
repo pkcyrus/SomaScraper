@@ -110,7 +110,7 @@ public class Main extends Application {
             Scraper scraper = new Scraper(null);
             Configuration configuration = new Configuration(Configuration.FILE_USER, new SQLiteInit());
             List<Play> result = scraper.scrapeAllNow(configuration.getChannels());
-            dbManager.addAllPlays(result);
+            dbManager.addPlayAndDependents(result);
             return;
         }catch (SAXException | SQLException | IOException e) {
             e.printStackTrace();

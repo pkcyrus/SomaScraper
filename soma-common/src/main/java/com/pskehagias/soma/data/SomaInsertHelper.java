@@ -5,6 +5,9 @@ import com.pskehagias.soma.common.Channel;
 import com.pskehagias.soma.common.Play;
 
 import java.sql.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by pkcyr on 8/10/2016.
@@ -60,7 +63,7 @@ public class SomaInsertHelper implements InsertHelper{
             throw new SQLException("No connection established to the database");
         }
 
-        try(PreparedStatement statement = prepareStatement(addChannelQuery())){//connection.prepareStatement(addChannelQuery(), Statement.RETURN_GENERATED_KEYS)){
+        try(PreparedStatement statement = prepareStatement(addChannelQuery())){
             statement.setString(1,name);
             statement.setString(2,pl_url);
             return executeReturnId(statement);
@@ -73,12 +76,41 @@ public class SomaInsertHelper implements InsertHelper{
     }
 
     @Override
+    public long addPlayAndDependents(List<Play> plays) throws SQLException{
+        long result = 0;
+
+        if(connection == null){
+            throw new SQLException("No connection established to the database");
+        }
+        connection.setAutoCommit(false);
+        try {
+            for (Play p : plays) {
+                addArtist(p.getArtist());
+                addAlbum(p.getAlbum(), p.getArtist());
+                addSong(p.getSong(), p.getAlbum(), p.getArtist());
+                long pAdd = addPlay(p);
+                if(pAdd > 0){ //If the play added, increment the result count.
+                    result++;
+                }
+            }
+            connection.commit();
+        }catch(SQLException e){
+            connection.rollback();
+            throw e;
+        }finally {
+            connection.setAutoCommit(true);
+        }
+
+        return result;
+    }
+
+    @Override
     public long addPlay(String song, String channel, long timestamp) throws SQLException{
         if(connection == null){
             throw new SQLException("No connection established to the database");
         }
 
-        try(PreparedStatement statement = prepareStatement(addPlayQuery())){//connection.prepareStatement(addPlayQuery(), Statement.RETURN_GENERATED_KEYS)){
+        try(PreparedStatement statement = prepareStatement(addPlayQuery())){
             statement.setLong(1, timestamp);
             statement.setString(2, channel);
             statement.setString(3, song);
@@ -97,7 +129,7 @@ public class SomaInsertHelper implements InsertHelper{
             throw new SQLException("No connection established to the database");
         }
 
-        try(PreparedStatement statement = prepareStatement(addSongQuery())){//connection.prepareStatement(addSongQuery(), Statement.RETURN_GENERATED_KEYS)){
+        try(PreparedStatement statement = prepareStatement(addSongQuery())){
             statement.setString(1, name);
             statement.setString(2, album);
             statement.setString(3, artist);
@@ -111,7 +143,7 @@ public class SomaInsertHelper implements InsertHelper{
             throw new SQLException("No connection established to the database");
         }
 
-        try(PreparedStatement statement = prepareStatement(addAlbumQuery())){//connection.prepareStatement(addAlbumQuery(), Statement.RETURN_GENERATED_KEYS)){
+        try(PreparedStatement statement = prepareStatement(addAlbumQuery())){
             statement.setString(1,artist);
             statement.setString(2,name);
             return executeReturnId(statement);
@@ -124,7 +156,7 @@ public class SomaInsertHelper implements InsertHelper{
             throw new SQLException("No connection established to the database");
         }
 
-        try(PreparedStatement statement = prepareStatement(addArtistQuery())){//connection.prepareStatement(addArtistQuery(), Statement.RETURN_GENERATED_KEYS)){
+        try(PreparedStatement statement = prepareStatement(addArtistQuery())){
             statement.setString(1, name);
             return  executeReturnId(statement);
         }
