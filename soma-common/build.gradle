@@ -10,6 +10,7 @@ targetCompatibility = 1.8
 
 repositories{
     mavenCentral()
+    maven{url="https://jitpack.io"}
 }
 
 configurations{
@@ -18,7 +19,7 @@ configurations{
 }
 
 dependencies{
-    sqlbin 'org.xerial:sqlite-jdbc:3.8.11.2'
+    sqlbin 'com.github.xerial:sqlite-jdbc:-SNAPSHOT'
     sqlbin 'mysql:mysql-connector-java:6.0.3'
 }
 

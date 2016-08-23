@@ -8,7 +8,7 @@
     <player buffer="512" record="true" directory="./stream/"/>
     <channels>
         <channel name="Poptron" short="poptron" pl_url="http://www.somafm.com/poptron/songhistory.html">
-            <doScrape>false</doScrape>
+            <doScrape>true</doScrape>
             <icon resource="/images/channel_icons/poptron120.png"/>
             <stream type="mp3:128k" url="http://ice1.somafm.com/poptron-128-mp3" alt="http://ice2.somafm.com/poptron-128-mp3"/>
             <!--<stream type="aac:64k" url="http://ice1.somafm.com/poptron-64-aac" alt="http://ice2.somafm.com/poptron-64-aac"/>-->
