@@ -1,6 +1,27 @@
 allprojects{
     repositories{
         mavenCentral()
-        maven{url="https://jitpack.io"}
     }
+}
+
+task sqliteClean(type: Delete){
+    delete '../sqlite-jdbc'
+}
+
+task sqliteClone(type: Exec){
+    workingDir '../'
+    executable 'git'
+    args 'clone', 'https://github.com/xerial/sqlite-jdbc'
+    dependsOn sqliteClean
+}
+
+task sqliteBuild(type: Exec){
+    workingDir '../sqlite-jdbc/'
+    executable 'make'
+    dependsOn sqliteClone
+}
+
+task sqliteCloneAndBuild(){
+    dependsOn sqliteClone
+    dependsOn sqliteBuild
 }

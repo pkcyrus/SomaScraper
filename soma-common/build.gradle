@@ -19,7 +19,10 @@ configurations{
 }
 
 dependencies{
-    sqlbin 'com.github.xerial:sqlite-jdbc:-SNAPSHOT'
+    sqlbin 'org.xerial:sqlite-jdbc:3.8.11.2'
+/*  If compiling for Raspberry-Pi, after running the sqliteCloneAndBuild task, comment out the preceding line and uncomment the
+/*  following line. */
+//  sqlbin fileTree(dir: "../sqlite-jdbc/target/", include: "*.jar")
     sqlbin 'mysql:mysql-connector-java:6.0.3'
 }
 
