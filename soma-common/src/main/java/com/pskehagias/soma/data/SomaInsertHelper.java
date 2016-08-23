@@ -57,6 +57,13 @@ public class SomaInsertHelper implements InsertHelper{
                 "FROM songs inner join channels where channels.name = ? and songs.name = ?";
     }
 
+    public String incrementPlayCountQuery(){
+        return "UPDATE songs SET plays = plays + 1 " +
+                "WHERE name = ? " +
+                "AND album_id = (SELECT _id FROM albums WHERE name = ?) " +
+                "AND artist_id = (SELECT _id FROM artists WHERE name = ?)";
+    }
+
     @Override
     public long addChannel(String name, String pl_url) throws SQLException{
         if(connection == null){
@@ -87,10 +94,11 @@ public class SomaInsertHelper implements InsertHelper{
             for (Play p : plays) {
                 addArtist(p.getArtist());
                 addAlbum(p.getAlbum(), p.getArtist());
-                addSong(p.getSong(), p.getAlbum(), p.getArtist());
+                long sAdd = addSong(p.getSong(), p.getAlbum(), p.getArtist());
                 long pAdd = addPlay(p);
-                if(pAdd > 0){ //If the play added, increment the result count.
+                if(pAdd > 0 && sAdd < 0){ //If the play was added for an existing song, increment the result count.
                     result++;
+                    incrementPlayCount(p);
                 }
             }
             connection.commit();
@@ -109,13 +117,14 @@ public class SomaInsertHelper implements InsertHelper{
         if(connection == null){
             throw new SQLException("No connection established to the database");
         }
-
+        long result;
         try(PreparedStatement statement = prepareStatement(addPlayQuery())){
             statement.setLong(1, timestamp);
             statement.setString(2, channel);
             statement.setString(3, song);
-            return executeReturnId(statement);
+            result = executeReturnId(statement);
         }
+        return result;
     }
 
     @Override
@@ -160,6 +169,23 @@ public class SomaInsertHelper implements InsertHelper{
             statement.setString(1, name);
             return  executeReturnId(statement);
         }
+    }
+
+    @Override
+    public boolean incrementPlayCount(Play play) throws SQLException {
+        if(connection == null){
+            throw new SQLException("No connection established to the database");
+        }
+
+        long modCount;
+        try(PreparedStatement statement = prepareStatement(incrementPlayCountQuery())){
+            statement.setString(1,play.getSong());
+            statement.setString(2,play.getAlbum());
+            statement.setString(3,play.getArtist());
+            modCount = statement.executeUpdate();
+        }
+
+        return modCount > 0;
     }
 
     protected PreparedStatement prepareStatement(String query) throws SQLException{

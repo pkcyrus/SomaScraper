@@ -1,6 +1,7 @@
 package com.pskehagias.soma.ui;
 
 import com.pskehagias.soma.common.RatingSource;
+import com.pskehagias.soma.util.ParseTime;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -107,7 +108,7 @@ public class ControllerBrowse implements Controller, RatingCell.RatingUpdateCall
         });
 
         date_range_max.valueProperty().addListener((observable1, oldValue1, newValue1) -> {
-            max_date.setValue(date_range_max.getValue().plus(1,ChronoUnit.DAYS).atStartOfDay(ZoneId.systemDefault()).toEpochSecond()*1000);
+            max_date.setValue(date_range_max.getValue().plus(1,ChronoUnit.DAYS).atStartOfDay(ZoneId.of("UTC")).toInstant().toEpochMilli());
         });
 
         date_range_min.setValue(LocalDate.now().minus(1, ChronoUnit.MONTHS));

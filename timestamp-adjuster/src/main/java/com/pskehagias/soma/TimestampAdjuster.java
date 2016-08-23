@@ -25,7 +25,7 @@ public class TimestampAdjuster {
             }
 
             try(PreparedStatement statement = c.prepareStatement("update plays set timestamp = timestamp + ?")) {
-                statement.setLong(1, Duration.ofHours(7).toMillis() - 1);
+                statement.setLong(1, Duration.ofHours(7).toMillis());
 
                 System.out.println("Please wait, modifying timestamps...");
 

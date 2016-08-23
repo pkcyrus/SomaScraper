@@ -35,7 +35,7 @@ public class SomaSQLite {
                     +"album_id INTEGER NOT NULL, \n"
                     +"artist_id INTEGER NOT NULL, \n"
                     +"name TEXT NOT NULL, \n"
-                    +"plays INTEGER NOT NULL DEFAULT 0, \n"
+                    +"plays INTEGER NOT NULL DEFAULT 1, \n"
                     +"UNIQUE (album_id,artist_id,name) ON CONFLICT IGNORE, \n"
                     +"FOREIGN KEY (album_id) REFERENCES albums (_id), \n"
                     +"FOREIGN KEY (artist_id) REFERENCES artists (_id) )";

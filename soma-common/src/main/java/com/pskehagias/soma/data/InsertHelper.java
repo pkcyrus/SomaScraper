@@ -20,4 +20,5 @@ public interface InsertHelper{
     long addSong(String name, String album, String artist) throws SQLException;
     long addAlbum(String name, String artist) throws SQLException;
     long addArtist(String name) throws SQLException;
+    boolean incrementPlayCount(Play play) throws SQLException;
 }

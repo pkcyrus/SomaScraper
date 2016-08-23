@@ -17,7 +17,7 @@ public class SomaMysql {
                     "album_id INTEGER UNSIGNED NOT NULL REFERENCES albums(_id), \n" +
                     "artist_id INTEGER UNSIGNED NOT NULL REFERENCES artists(_id), \n" +
                     "name VARCHAR(128) NOT NULL, \n" +
-                    "plays INTEGER NOT NULL DEFAULT 0, \n" +
+                    "plays INTEGER NOT NULL DEFAULT 1, \n" +
                     "PRIMARY KEY (_id), \n" +
                     "KEY (album_id), \n" +
                     "KEY (artist_id), \n" +

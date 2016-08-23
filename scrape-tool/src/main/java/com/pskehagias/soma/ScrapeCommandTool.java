@@ -3,6 +3,7 @@ package com.pskehagias.soma;
 import com.pskehagias.soma.common.Configuration;
 import com.pskehagias.soma.common.Play;
 import com.pskehagias.soma.data.SomaDBManager;
+import com.pskehagias.soma.data.SomaDBSeeder;
 import com.pskehagias.soma.data.SomaInsertHelper;
 import com.pskehagias.soma.data.SomaMysqlHelper;
 import com.pskehagias.soma.scraper.Scraper;
@@ -19,6 +20,14 @@ public class ScrapeCommandTool {
     public static void scrapesqlite(List<Play> plays) throws SQLException {
         SomaDBManager sdb = new SomaDBManager();
 
+        try {
+            SomaDBSeeder dbSeeder = new SomaDBSeeder(sdb);
+            dbSeeder.seed();
+        }catch (RuntimeException e){
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause().getMessage());
+        }
+
         sdb.addPlayAndDependents(plays);
         sdb.close();
     }
@@ -32,6 +41,14 @@ public class ScrapeCommandTool {
         SomaMysqlHelper helper = new SomaMysqlHelper(args[0], args[1]);
         helper.setCredentials(args[2], args[3]);
         SomaInsertHelper inserter = new SomaInsertHelper(helper);
+
+        try {
+            SomaDBSeeder dbSeeder = new SomaDBSeeder(inserter);
+            dbSeeder.seed();
+        }catch (RuntimeException e){
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause().getMessage());
+        }
 
         inserter.addPlayAndDependents(plays);
         inserter.close();

@@ -98,7 +98,7 @@ public class SomaDBManager extends SomaInsertHelper{
                     + "INNER JOIN artists ON songs.artist_id = artists._id "
                     + "INNER JOIN song_ratings ON song_ratings._id = songs._id "
                     + "WHERE channel_id = (SELECT _id FROM channels WHERE name=?) "
-                    + "AND timestamp > ? AND timestamp < ? "
+                    + "AND timestamp > ? AND timestamp <= ? "
                     + "AND song_ratings.rating >= ?";
 
     public List<Play> getPlaylist(String channel, long min_stamp, long max_stamp) throws SQLException{
@@ -195,125 +195,6 @@ public class SomaDBManager extends SomaInsertHelper{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return result;
-    }
-
-    public static final String SELECT_PLAY =
-            "SELECT * FROM plays WHERE channel_id=(SELECT _id FROM channels WHERE name=? LIMIT 1) AND timestamp=?";
-    public static final String SELECT_SONG =
-            "SELECT * FROM songs WHERE name=? AND album_id=(SELECT _id FROM albums WHERE name=? LIMIT 1)";
-    public static final String SELECT_ALBUM =
-            "SELECT * FROM albums WHERE name=? AND artist_id=(SELECT _id FROM artists WHERE name=? LIMIT 1)";
-    public static final String SELECT_ARTIST =
-            "SELECT * FROM artists WHERE name=? LIMIT 1";
-
-
-    public boolean checkIfPlayExists(Play play) {
-        boolean result = false;
-        try (PreparedStatement statement = connection.prepareStatement(SELECT_PLAY)) {
-            statement.setString(1, play.getChannel());
-            statement.setLong(2, play.getTimestamp());
-            ResultSet resultSet = statement.executeQuery();
-            result = resultSet.isBeforeFirst();
-            resultSet.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    public boolean checkIfArtistExists(String artist) {
-        boolean result = false;
-        try (PreparedStatement statement = connection.prepareStatement(SELECT_ARTIST)) {
-            statement.setString(1, artist);
-            ResultSet resultSet = statement.executeQuery();
-            result = resultSet.isBeforeFirst();
-            resultSet.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    public boolean checkIfAlbumExists(String artist, String album) {
-        boolean result = false;
-        try (PreparedStatement statement = connection.prepareStatement(SELECT_ALBUM)) {
-            statement.setString(1, album);
-            statement.setString(2, artist);
-            ResultSet resultSet = statement.executeQuery();
-            result = resultSet.isBeforeFirst();
-            resultSet.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    public boolean checkIfSongExists(String album, String song) {
-        boolean result = false;
-        try (PreparedStatement statement = connection.prepareStatement(SELECT_SONG)) {
-            statement.setString(1, song);
-            statement.setString(2, album);
-            ResultSet resultSet = statement.executeQuery();
-            result = resultSet.isBeforeFirst();
-            resultSet.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    public static final String INCREMENT_PLAYS =
-            "UPDATE songs SET plays=(plays+1) WHERE name=? AND album_id=(SELECT _id FROM albums WHERE name=? LIMIT 1)";
-
-    public void incrementPlayCount(Play play) throws SQLException{
-        if(connection == null){
-            throw new SQLException("No connection established to the database");
-        }
-
-        try (PreparedStatement statement = connection.prepareStatement(INCREMENT_PLAYS)) {
-            statement.setString(1, play.getSong());
-            statement.setString(2, play.getAlbum());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public long addPlayAndDependents(List<Play> plays) throws SQLException {
-        long result = 0;
-
-        if(connection == null){
-            throw new SQLException("No connection established to the database");
-        }
-
-        for (Play play : plays) {
-
-            if (!checkIfArtistExists(play.getArtist())) {
-                addArtist(play.getArtist());
-                addAlbum(play.getAlbum(), play.getArtist());
-                addSong(play.getSong(), play.getAlbum(), play.getArtist());
-                addPlay(play.getSong(), play.getChannel(), play.getTimestamp());
-                incrementPlayCount(play); result++;
-            }
-            if (!checkIfAlbumExists(play.getArtist(), play.getAlbum())) {
-                addAlbum(play.getAlbum(), play.getArtist());
-                addSong(play.getSong(), play.getAlbum(), play.getArtist());
-                addPlay(play.getSong(), play.getChannel(), play.getTimestamp());
-                incrementPlayCount(play); result++;
-            }
-            if (!checkIfSongExists(play.getAlbum(), play.getSong())) {
-                addSong(play.getSong(), play.getAlbum(), play.getArtist());
-                addPlay(play.getSong(), play.getChannel(), play.getTimestamp());
-                incrementPlayCount(play); result++;
-            }
-            if (!checkIfPlayExists(play)) {
-                addPlay(play.getSong(), play.getChannel(), play.getTimestamp());
-                incrementPlayCount(play); result++;
-            }
-        }
-
         return result;
     }
 
